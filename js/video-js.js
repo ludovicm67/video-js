@@ -20,6 +20,7 @@ class VideoJS {
     this.player = null;
     this.playPause = null;
     this.showRemainingTime = true;
+    this.timer = null; // used for mouseOver
 
     this.playerInit();
 
@@ -37,6 +38,24 @@ class VideoJS {
       player.parentNode.insertBefore(wrapper, player);
       this.player = wrapper.firstChild;
       this.wrapper = wrapper;
+      this.wrapper.addEventListener('mouseover', () => {
+        this.timer =  window.setTimeout(() => {
+          if (this.player.paused) this.controls.classList.remove('video-js--longOver');
+          else this.controls.classList.add('video-js--longOver');
+        }, 2000);
+      }, false);
+      this.wrapper.addEventListener('mouseout', () => {
+        window.clearTimeout(this.timer);
+        this.controls.classList.remove('video-js--longOver');
+      }, false);
+      this.wrapper.addEventListener('mousemove', () => {
+        window.clearTimeout(this.timer);
+        this.controls.classList.remove('video-js--longOver');
+        this.timer =  window.setTimeout(() => {
+          if (this.player.paused) this.controls.classList.remove('video-js--longOver');
+          else this.controls.classList.add('video-js--longOver');
+        }, 2000);
+      }, false);
       player.remove();
       this.wrapped = true;
     }
@@ -125,6 +144,7 @@ class VideoJS {
       if (this.player.paused) {
         this.playPause.textContent = '▶';
         this.controls.classList.add('video-js--paused');
+        this.controls.classList.remove('video-js--longOver');
       } else {
         this.playPause.textContent = '▮▮';
         this.controls.classList.remove('video-js--paused');

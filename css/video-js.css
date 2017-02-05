@@ -15,6 +15,7 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-size: 16px;
 }
 
 .video-js:-webkit-full-screen {
@@ -77,6 +78,9 @@
   opacity: 1;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, .8));
 }
+.video-js--longOver {
+  opacity: 0 !important;
+}
 .video-js--title {
   display: block;
   margin: 20px;
@@ -105,6 +109,7 @@
   display: inline-block;
   vertical-align: bottom;
   margin: 20px;
+  margin-right: 5px;
   text-align: center;
   width: 20px;
   cursor: pointer;
@@ -114,13 +119,14 @@
 .video-js--duration {
   display: inline-block;
   vertical-align: bottom;
-  margin: 20px;
+  margin: 20px 5px;
   text-align: center;
-  width: 20px;
+  width: 60px;
   cursor: pointer;
   position: absolute;
   bottom: 0;
   left: 50px;
+  font-size: 14px;
 }
 .video-js--fullscreen {
   display: inline-block;
