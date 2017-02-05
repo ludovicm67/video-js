@@ -19,6 +19,7 @@ class VideoJS {
     this.controls = null;
     this.player = null;
     this.playPause = null;
+    this.showRemainingTime = true;
 
     this.playerInit();
 
@@ -75,8 +76,34 @@ class VideoJS {
         else this.pause();
       }, false);
       this.controls.appendChild(this.playPause);
+
+      this.duration = document.createElement('div');
+      this.duration.classList.add('video-js--duration');
+      this.duration.textContent = '0:00';
+      this.duration.addEventListener('click', () => {
+        if (this.showRemainingTime) this.showRemainingTime = false;
+        else this.showRemainingTime = true;
+      }, false);
+      this.controls.appendChild(this.duration);
+
       wrapper.appendChild(this.controls);
     }
+  }
+
+  prettyTime(time) {
+    let finalTime  = '';
+    let sec = parseInt(time, 10);
+    let hours = Math.floor(sec / 3600);
+    let min = Math.floor((sec - (hours * 3600)) / 60);
+    sec = sec - (hours * 3600) - (min * 60);
+
+    if (hours > 0) {
+      if (hours < 10) hours = '0' + hours;
+      finalTime = hours + ':';
+      if (min < 10) min = '0' + min;
+    }
+    if (sec < 10) sec = '0' + sec;
+    return finalTime + min + ':' + sec;
   }
 
   playerInit() {
@@ -93,6 +120,13 @@ class VideoJS {
       } else {
         this.playPause.textContent = '▮▮';
         this.controls.classList.remove('video-js--paused');
+      }
+      if (this.showRemainingTime) {
+        let diffTime = Math.ceil(this.player.duration - this.player.currentTime);
+        if (diffTime !== 0) this.duration.textContent = '-' + this.prettyTime(diffTime);
+        else this.duration.textContent = this.prettyTime(diffTime);
+      } else {
+        this.duration.textContent = this.prettyTime(this.player.currentTime);
       }
     });
     console.info('video-js player initialized');
