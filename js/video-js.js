@@ -4,12 +4,14 @@ class VideoJS {
     author = null,
     authorURL = null,
     autoplay = false,
+    loop = false,
     title = null,
     selector = null,
   }) {
     this.author = author;
     this.authorURL = authorURL;
     this.autoplay = autoplay;
+    this.loop = loop;
     this.title = title;
     this.selector = selector;
 
@@ -80,6 +82,7 @@ class VideoJS {
   playerInit() {
     this.wrapPlayer();
     this.player.controls = false;
+    this.player.loop = this.loop;
     this.player.autoplay = this.autoplay;
     this.play();
     if (!this.autoplay) this.pause();
