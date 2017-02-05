@@ -2,9 +2,11 @@ class VideoJS {
 
   constructor({
     autoplay = false,
+    title = null,
     selector = null,
   }) {
     this.autoplay = autoplay;
+    this.title = title;
     this.selector = selector;
 
     this.wrapped = false;
@@ -24,7 +26,6 @@ class VideoJS {
       wrapper.style.height = player.offsetHeight + 'px';
       wrapper.style.width = player.offsetWidth + 'px';
       this.addControls(wrapper);
-      console.log(this);
       player.parentNode.insertBefore(wrapper, player);
       this.player = wrapper.firstChild;
       this.wrapper = wrapper;
@@ -39,6 +40,14 @@ class VideoJS {
     if(!this.wrapped) {
       let controls = document.createElement('div');
       controls.classList.add('video-js--controls');
+
+      if (this.title) {
+        this.titleZone = document.createElement('div');
+        this.titleZone.classList.add('video-js--title');
+        this.titleZone.textContent = this.title;
+        controls.appendChild(this.titleZone);
+      }
+
       this.playPause = document.createElement('div');
       this.playPause.classList.add('video-js--playPause');
       this.playPause.textContent = '▶';

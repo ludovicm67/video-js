@@ -33,6 +33,15 @@
   opacity: 1;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, .8));
 }
+.video-js--title {
+  display: block;
+  margin: 20px;
+  font-size: 18px;
+  white-space: nowrap;
+  height: 20px;
+  font-weight: bold;
+  overflow: hidden;
+}
 .video-js--playPause {
   display: inline-block;
   vertical-align: bottom;
