@@ -81,7 +81,8 @@ class VideoJS {
     this.wrapPlayer();
     this.player.controls = false;
     this.player.autoplay = this.autoplay;
-    if (this.autoplay) this.play();
+    this.play();
+    if (!this.autoplay) this.pause();
     this.player.addEventListener('timeupdate', () => {
       if (this.player.paused) {
         this.playPause.textContent = '▶';
