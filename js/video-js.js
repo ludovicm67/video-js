@@ -1,10 +1,14 @@
 class VideoJS {
 
   constructor({
+    author = null,
+    authorURL = null,
     autoplay = false,
     title = null,
     selector = null,
   }) {
+    this.author = author;
+    this.authorURL = authorURL;
     this.autoplay = autoplay;
     this.title = title;
     this.selector = selector;
@@ -34,8 +38,6 @@ class VideoJS {
     }
   }
 
-
-
   addControls(wrapper) {
     if(!this.wrapped) {
       let controls = document.createElement('div');
@@ -46,17 +48,27 @@ class VideoJS {
         this.titleZone.classList.add('video-js--title');
         this.titleZone.textContent = this.title;
         controls.appendChild(this.titleZone);
+        if (this.author) {
+          this.authorZone = document.createElement('div');
+          this.authorZone.classList.add('video-js--author');
+          this.authorZone.textContent = this.author;
+          if (this.authorURL) {
+            this.authorZone.classList.add('video-js--cursorPointer');
+            this.authorZone.addEventListener('click', () => {
+              let win = window.open(this.authorURL, '_blank');
+              win.focus();
+            }, false);
+          }
+          controls.appendChild(this.authorZone);
+        }
       }
 
       this.playPause = document.createElement('div');
       this.playPause.classList.add('video-js--playPause');
       this.playPause.textContent = '▶';
       this.playPause.addEventListener('click', () => {
-        if (this.player.paused) {
-          this.play();
-        } else {
-          this.pause();
-        }
+        if (this.player.paused) this.play();
+        else this.pause();
       }, false);
       controls.appendChild(this.playPause);
       wrapper.appendChild(controls);

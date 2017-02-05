@@ -1,4 +1,5 @@
 .video-js {
+  font-family: sans-serif;
   border-radius: 5px;
   box-sizing: border-box;
   margin: 0;
@@ -42,10 +43,26 @@
   font-weight: bold;
   overflow: hidden;
 }
+.video-js--author {
+  display: block;
+  color: #ddd;
+  margin: 20px;
+  margin-top: -15px;
+  font-size: 14px;
+  white-space: nowrap;
+  height: 20px;
+  font-weight: bold;
+  overflow: hidden;
+}
+.video-js--cursorPointer {
+  cursor: pointer;
+}
 .video-js--playPause {
   display: inline-block;
   vertical-align: bottom;
   margin: 20px;
+  text-align: center;
+  width: 20px;
   cursor: pointer;
   position: absolute;
   bottom: 0;
