@@ -86,6 +86,14 @@ class VideoJS {
       }, false);
       this.controls.appendChild(this.duration);
 
+      this.fs = document.createElement('div');
+      this.fs.classList.add('video-js--fullscreen');
+      this.fs.textContent = '⮔';
+      this.fs.addEventListener('click', () => {
+        this.fullscreen();
+      }, false);
+      this.controls.appendChild(this.fs);
+
       wrapper.appendChild(this.controls);
     }
   }
@@ -139,6 +147,30 @@ class VideoJS {
 
   play() {
     this.player.play();
+  }
+
+  fullscreen() {
+    if (
+      document.fullscreenElement
+      || document.webkitFullscreenElement
+      || document.mozFullScreenElement
+      || document.msFullscreenElement
+    ) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+    } else {
+      if (this.wrapper.requestFullscreen) {
+        this.wrapper.requestFullscreen();
+      } else if (this.wrapper.mozRequestFullScreen) {
+        this.wrapper.mozRequestFullScreen();
+      } else if (this.wrapper.webkitRequestFullscreen) {
+        this.wrapper.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      } else if (this.wrapper.msRequestFullscreen) {
+        this.wrapper.msRequestFullscreen();
+      }
+    }
   }
 
 }
