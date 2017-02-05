@@ -14,6 +14,7 @@ class VideoJS {
     this.selector = selector;
 
     this.wrapped = false;
+    this.controls = null;
     this.player = null;
     this.playPause = null;
 
@@ -40,14 +41,15 @@ class VideoJS {
 
   addControls(wrapper) {
     if(!this.wrapped) {
-      let controls = document.createElement('div');
-      controls.classList.add('video-js--controls');
+      this.controls = document.createElement('div');
+      this.controls.classList.add('video-js--controls');
+      this.controls.classList.add('video-js--paused');
 
       if (this.title) {
         this.titleZone = document.createElement('div');
         this.titleZone.classList.add('video-js--title');
         this.titleZone.textContent = this.title;
-        controls.appendChild(this.titleZone);
+        this.controls.appendChild(this.titleZone);
         if (this.author) {
           this.authorZone = document.createElement('div');
           this.authorZone.classList.add('video-js--author');
@@ -59,7 +61,7 @@ class VideoJS {
               win.focus();
             }, false);
           }
-          controls.appendChild(this.authorZone);
+          this.controls.appendChild(this.authorZone);
         }
       }
 
@@ -70,8 +72,8 @@ class VideoJS {
         if (this.player.paused) this.play();
         else this.pause();
       }, false);
-      controls.appendChild(this.playPause);
-      wrapper.appendChild(controls);
+      this.controls.appendChild(this.playPause);
+      wrapper.appendChild(this.controls);
     }
   }
 
@@ -83,8 +85,10 @@ class VideoJS {
     this.player.addEventListener('timeupdate', () => {
       if (this.player.paused) {
         this.playPause.textContent = '▶';
+        this.controls.classList.add('video-js--paused');
       } else {
         this.playPause.textContent = '▮▮';
+        this.controls.classList.remove('video-js--paused');
       }
     });
     console.info('video-js player initialized');
