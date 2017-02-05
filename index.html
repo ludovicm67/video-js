@@ -15,12 +15,22 @@
   </header>
   <div>
     <div class="container">
+      <h2>Un player simple, élégant et léger :</h2>
       <video controls src="videos/mov_bbb.mp4" width="560" height="308"></video>
       <p>Ceci est une démo du player.</p>
       <p>Attention, ce player utilise des technologies très récentes; utilisez un navigateur tel que Google Chrome ou Mozilla Firefox pour être en mesure de tester l'ensemble des fonctionnalités proposées.</p>
       <p>Contribuez : <a href="https://github.com/ludovicm67/video-js" target="_blank">https://github.com/ludovicm67/video-js</a></p>
+      <h2>Le player par défaut de votre navigateur :</h2>
+      <video controls src="videos/mov_bbb.mp4" width="560" height="308"></video>
+      <h2>Bilan ?</h2>
+      <p>Chaque navigateur utilise son propre player, qui n'est pas directement customisable, ce qui peut être assez gênant... <strong>video-js</strong> permet de palier ce problème rapidement en garantissant un affichage identique sur tous les navigateurs de dernière génération. Il est également possible de définir un titre, l'auteur et l'url vers la page de l'auteur, ce qui permet une bonne intégration dans la plupart des sites web, comme des blogs par exemple.</p>
     </div>
   </div>
+  <footer>
+    <div class="container">
+      <a href="https://github.com/ludovicm67/video-js" target="_blank">Contribuer</a>
+    </div>
+  </footer>
 <script src="js/video-js.js"></script>
 <script>
 let player = new VideoJS({

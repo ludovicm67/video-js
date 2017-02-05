@@ -24,3 +24,18 @@ p {
   font-family: serif;
   margin-top: 5px;
 }
+a {
+  color: #149bde;
+}
+h2 {
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+footer {
+  margin-top: 32px;
+  background-color: #ddd;
+  padding: 32px;
+}
+footer a {
+  color: #777;
+}
